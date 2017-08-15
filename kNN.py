@@ -4,8 +4,6 @@
 # 下面的区块注释需要三个双引号。
 """
 内容：kNN（k Nearest Neighbors）算法
-输入：
-输出： 
 作者：Stephen Curry
 日期：2017/8/13
 """
