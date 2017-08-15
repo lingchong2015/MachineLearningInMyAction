@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*- #设置源文件编码。
 
 # 井号后面的行注释需要空格。
-# 下面的区块注释需要三个双引号。
 """
 内容：kNN（k Nearest Neighbors）算法
 作者：Stephen Curry
