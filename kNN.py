@@ -19,6 +19,8 @@ import operator
 import matplotlib
 import matplotlib.pyplot as plt
 
+from os import listdir
+
 """Function"""
 
 
@@ -71,7 +73,7 @@ def file2matrix(_filename):  # 读取约会数据文件。
     return ret_mat, list_label
 
 
-def auto_norm(_data_set):  # 归一化特征值
+def auto_norm(_data_set):  # 归一化特征值。
     min_values = _data_set.min(0)
     max_values = _data_set.max(0)
     ranges = max_values - min_values
@@ -82,7 +84,7 @@ def auto_norm(_data_set):  # 归一化特征值
     return norm_data_set, ranges, max_values, min_values
 
 
-def dating_class_test():  # 约会kNN测试
+def dating_class_test():  # 约会kNN测试。
     mat_dating_data, list_label = file2matrix('/Users/lingchong/documents/development/ai/machinelearning/'
                                               'machinelearninginaction/ch02/datingTestSet2.txt')
     norm_data_set, ranges, max_values, min_values = auto_norm(mat_dating_data)
@@ -100,7 +102,7 @@ def dating_class_test():  # 约会kNN测试
     print '共有%d个错误。' % error_count
 
 
-def dating_person_classify():  # 约会交互界面
+def dating_person_classify():  # 约会交互界面。
     person_class_list = ['完全没感觉', '感觉一般', '非常来电']
 
     flight_miles = float(raw_input('请输入您每年的飞行公里数：'))
@@ -131,6 +133,11 @@ def img2vector(_filename):  # 读取文本格式的图像文件并转换为向�
             ret_vec[0, i * 32 + j] = int(line[j])
 
     return ret_vec
+
+
+def handwriting_class_test():  # 手写识别测试。
+    training_file_dir = listdir('/Users/lingchong/documents/development/ai/machinelearning/machinelearninginaction/ch02'
+                                '/digits/trainingdigits')
 
 
 """Caller"""
