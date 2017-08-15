@@ -10,6 +10,8 @@
 日期：2017/8/13
 """
 
+# Python导入模块的方法有两种：import module 和 from module import，区别是前者所有导入的类或函数使用时需加上模块名的限定，而后者不需要。
+
 # 科学计算包。
 from numpy import *
 
@@ -20,6 +22,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 from os import listdir
+from datetime import datetime
 
 """Function"""
 
@@ -135,9 +138,48 @@ def img2vector(_filename):  # 读取文本格式的图像文件并转换为向�
     return ret_vec
 
 
+# 1.获取所有训练样本文件。
+# 2.将所有训练样本文件转换为向量矩阵，并记录对应的数字，形成数字列表。
+# 3.读入一个测试样本，转换为向量，然后进行测试。
+# 4.重复3直到测试样本读取结束。
+# 5.输出统计结果。
 def handwriting_class_test():  # 手写识别测试。
-    training_file_dir = listdir('/Users/lingchong/documents/development/ai/machinelearning/machinelearninginaction/ch02'
-                                '/digits/trainingdigits')
+    start_time = datetime.now()
+
+    training_root_dir = '/Users/lingchong/documents/development/ai/machinelearning/machinelearninginaction/ch02' \
+                        '/digits/trainingdigits/'
+    training_file_dirs = listdir(training_root_dir)
+    mat_train = zeros((len(training_file_dirs), 1024))
+    list_fn = []
+    index = 0
+    for s in training_file_dirs:
+        mat_train[index, :] = img2vector(training_root_dir + s)
+        index += 1
+        list_fn.append(filename2number(s))
+
+    test_root_dir = '/Users/lingchong/documents/development/ai/machinelearning/machinelearninginaction/ch02/digits' \
+                    '/testdigits/'
+    test_file_dirs = listdir(test_root_dir)
+    error_count = 1
+    for s in test_file_dirs:
+        test_mat = img2vector(test_root_dir + s)
+        result = classify0(test_mat, mat_train, list_fn, 3)
+        if result != filename2number(s):
+            error_count += 1
+            print '测试样本与kNN分类器返回结果不符，测试样本名称：%s，分类结果：%s。' % (s, result)
+        else:
+            print '分类器执行正确，测试样本名称：%s，分类结果：%s。' % (s, result)
+
+    print '测试完毕，分类器正确率为%f。' % (1 - error_count / float(len(test_file_dirs)))
+
+    end_time = datetime.now()
+    print '测试时间为：%.2f秒。' % ((end_time - start_time).seconds + (end_time - start_time).microseconds / 1000000.0)
+
+
+def filename2number(fn):
+    fn_without_ex = fn.split('.')[0]
+    num = int(fn_without_ex.split('_')[0])
+    return num
 
 
 """Caller"""
@@ -159,7 +201,9 @@ def handwriting_class_test():  # 手写识别测试。
 # dating_class_test()
 # dating_person_classify()
 
-num_vec = img2vector('/Users/lingchong/documents/development/ai/machinelearning/machinelearninginaction/ch02/digits/'
-                     'trainingdigits/0_5.txt')
-print num_vec[0, 0:32]
-print num_vec[0, 32:90]
+# num_vec = img2vector('/Users/lingchong/documents/development/ai/machinelearning/machinelearninginaction/ch02/digits/'
+#                      'trainingdigits/0_5.txt')
+# print num_vec[0, 0:32]
+# print num_vec[0, 32:90]
+
+handwriting_class_test()
