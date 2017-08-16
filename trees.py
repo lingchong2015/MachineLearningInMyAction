@@ -10,6 +10,7 @@ from math import log
 
 import operator
 
+
 """
 Function
 """
@@ -134,6 +135,7 @@ def get_label_list(_data_set):  # 获取数据集中的标签。
 """
 Caller
 """
+
 
 data_set, label_list = create_data_set()
 # shannon_entropy = calc_shannon_entropy(data_set)
