@@ -116,6 +116,8 @@ def create_tree(_data_set, _list_col_name):  # 构建决策树。
         sub_col_name = _list_col_name[:]
         decision_tree[tree_node_name][i] = create_tree(split_data_set(_data_set, best_feature, i), sub_col_name)
 
+    return decision_tree
+
 
 def create_data_set():  # 创建测试样本。
     return [[1, 1, 'Yes'],
@@ -146,4 +148,7 @@ data_set, label_list = create_data_set()
 # test_label_list = get_label_list(data_set)
 # result_majority_label = majority_cnt(test_label_list)
 # print result_majority_label
+
+ret_decision_tree = create_tree(data_set, label_list)
+print ret_decision_tree
 
