@@ -8,6 +8,8 @@
 
 from math import log
 
+import operator
+
 """
 Function
 """
@@ -74,12 +76,57 @@ def choose_best_feature_to_split(_data_set):  # 选择最优数据集划分方�
     return best_feature_index
 
 
+def majority_cnt(_list_label):  # 从标签列表中选取出现频率最高的标签。
+    map_label_class = {}
+    for label in _list_label:
+        if label not in map_label_class.keys():
+            map_label_class[label] = 1
+        else:
+            map_label_class[label] += 1
+
+    map_label_class_sorted = sorted(map_label_class.iteritems(), key=operator.itemgetter(1), reverse=True)
+
+    return map_label_class_sorted[0][0]
+
+
+# 1、这是一个根据树数据结构的特征，使用递归方法构造的决策树。
+# 2、遇到下述两种情况结束递归：
+#    a. 当输入数据集（_data_set）中的类别都是一类时，表明已经到叶子节点，则返回类别名称并结束递归。
+#    b. 当数据集中的所有特征都已经用于构建决策树时，表明已无特征值可用，则选取频率出现最高的类别并结束递归。
+# 3、选取一个最佳特征，根据其不同的特征值进行分类递归。
+def create_tree(_data_set, _list_col_name):  # 构建决策树。
+    list_class = [row[-1] for row in _data_set]
+
+    if list_class.count(list_class[0]) == len(list_class):
+        return list_class[0]
+
+    if len(_data_set) == 1:
+        return majority_cnt(list_class)
+
+    best_feature = choose_best_feature_to_split(_data_set)
+    tree_node_name = _list_col_name[best_feature]
+    del(_list_col_name[best_feature])
+
+    decision_tree = {tree_node_name: {}}  # 二维字典。
+
+    # 开始构建树。
+    list_feature_val = [row[best_feature] for row in _data_set]
+    set_feature_val = set(list_feature_val)
+    for i in set_feature_val:
+        sub_col_name = _list_col_name[:]
+        decision_tree[tree_node_name][i] = create_tree(split_data_set(_data_set, best_feature, i), sub_col_name)
+
+
 def create_data_set():  # 创建测试样本。
     return [[1, 1, 'Yes'],
             [1, 1, 'Yes'],
             [1, 0, 'No'],
             [0, 1, 'No'],
             [0, 1, 'No']], ['No Surfacing', 'Flippers']
+
+
+def get_label_list(_data_set):  # 获取数据集中的标签。
+    return [row[-1] for row in _data_set]
 
 
 """
@@ -93,5 +140,10 @@ data_set, label_list = create_data_set()
 # print list_split
 # list_split = split_data_set(data_set, 0, 0)
 # print list_split
-ret_best_feature = choose_best_feature_to_split(data_set)
-print ret_best_feature
+# ret_best_feature = choose_best_feature_to_split(data_set)
+# print ret_best_feature
+
+# test_label_list = get_label_list(data_set)
+# result_majority_label = majority_cnt(test_label_list)
+# print result_majority_label
+
