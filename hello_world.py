@@ -47,7 +47,6 @@ import time
 
 
 def enumerate_it(_sequence, _start=0):
-
     """
         yield语句仅用于定义生成器函数时在其函数体内使用。当yield在一个函数定义中使用时，该函数不再被视为普通函数，而被编译器看作生成器函
         数使用。调用生成器函数可以返回生成器函数的迭代器对象iterator，调用iterator.next()会重复返回一个yield语句后面跟随的表达式（即：
@@ -93,7 +92,6 @@ def for_iterator_imitation(_list_index):
 
 
 def for_clause_imitation():
-
     """
         模拟for...in语法结构。
         注意：当for_iterator_imitation(...)函数执行完毕（即其中的while语句跳出）时，iterator.next()函数会返回（触发）一个
@@ -117,5 +115,16 @@ def for_clause_imitation():
         except StopIteration:
             break
 
+    # for_clause_imitation()
 
-for_clause_imitation()
+"""
+    for与while语句可以配合else语句使用，在这里，else语句是当for语句条件执行完毕或while语句条件为false时执行，但是如果是因为for或while
+    语句块内break语句被调用而退出循环的，else的语句块不会被执行到。
+"""
+for n in range(2, 10):
+    for x in range(2, n):
+        if n % x == 0:
+            print n, 'equals', x, '*', n / x
+            break
+    else:
+        print n, 'is a prime number'
