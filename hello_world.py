@@ -22,6 +22,8 @@ import sys
 from datetime import datetime
 import time
 
+import fib
+
 # while True:
 #     s = raw_input('请输入一个数字：')
 #     if s == 'quit':
@@ -200,9 +202,28 @@ import time
 # print pairs
 
 
-empty = ()
-print empty
-print len(empty)
-singleton = '1', '2',
-print singleton
-print len(singleton)
+# empty = ()
+# print empty
+# print len(empty)
+# singleton = '1', '2',
+# print singleton
+# print len(singleton)
+
+
+# fib.fib_print(10)
+# print fib.fib_list(10)
+# print fib.__name__
+# print fib.fib_print.__doc__
+# print fib.fib_list.__doc__
+
+# print sys.path
+
+
+print dir(fib)
+# print fib.__builtins__
+print fib.__doc__
+print fib.__file__
+print fib.__name__
+print fib.__package__
+print fib.fib_list
+print fib.fib_print
