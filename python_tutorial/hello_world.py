@@ -17,7 +17,7 @@
 #
 # print matRand * invMatRand - eye(4)
 
-from python_tutorial import fib
+from python_tutorial import *
 
 # while True:
 #     s = raw_input('请输入一个数字：')
@@ -214,14 +214,14 @@ from python_tutorial import fib
 # print sys.path
 
 
-print dir(fib)
+# print dir(fib)
 # print dir(fib.__builtins__)
 # print fib.__doc__
 # print fib.__file__
 # print fib.__name__
 # print fib.__package__
-print fib.fib_list.__doc__
-print fib.fib_print.__doc__
+# print fib.fib_list.__doc__
+# print fib.fib_print.__doc__
 
 
 # print dir()
@@ -229,3 +229,6 @@ print fib.fib_print.__doc__
 
 # for elem in dir(__builtin__):
 #     print elem
+
+
+# print dir()
