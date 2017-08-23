@@ -231,4 +231,4 @@ from python_tutorial import *
 #     print elem
 
 
-# print dir()
+print dir()
