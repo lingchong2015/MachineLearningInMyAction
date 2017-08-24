@@ -231,4 +231,26 @@ from python_tutorial import *
 #     print elem
 
 
-print dir()
+# print dir()
+
+
+# for x in range(1, 11):
+#     print repr(x).rjust(2), repr(x * x).rjust(3), repr(x * x * x).rjust(4)
+#
+# for x in range(1, 11):
+#     print '{0:2d} {1:3d} {2:4d}'.format(x, x * x, x * x * x)
+#
+# print 1, 2
+# print '1', '2'
+
+# print '{}{}'.format(1, 2)
+# print '{1}{1}'.format(1, 2)
+# print '{one}{two}'.format(one=1, two=2)
+# print '{0}{two}'.format(1, two=2)
+#
+# table = {'凌冲': 123, '朗朗': 333}
+# for k, v in table.items():
+#     print '{k:10}==>{v:10d}'.format(k=k, v=v)
+#
+# print '{凌冲},{朗朗}'.format(**table)
+# print '{0[凌冲]},{0[朗朗]}'.format(table)
