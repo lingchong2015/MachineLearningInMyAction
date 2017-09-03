@@ -243,14 +243,69 @@ from python_tutorial import *
 # print 1, 2
 # print '1', '2'
 
-print '{}{}'.format(1, 2)
-print '{1}{1}'.format(1, 2)
-print '{one}{two}'.format(one=1, two=2)
-print '{0}{two}'.format(1, two=2)
+# print '{}{}'.format(1, 2)
+# print '{1}{1}'.format(1, 2)
+# print '{one}{two}'.format(one=1, two=2)
+# print '{0}{two}'.format(1, two=2)
+#
+# table = {'凌冲': 123, '朗朗': 333}
+# for k, v in table.items():
+#     print '{k:10}==>{v:10d}'.format(k=k, v=v)
+#
+# print '{凌冲},{朗朗}'.format(**table)
+# print '{0[凌冲]},{0[朗朗]}'.format(table)
 
-table = {'凌冲': 123, '朗朗': 333}
-for k, v in table.items():
-    print '{k:10}==>{v:10d}'.format(k=k, v=v)
+# print file.__doc__
 
-print '{凌冲},{朗朗}'.format(**table)
-print '{0[凌冲]},{0[朗朗]}'.format(table)
+# f = open('Reflector 7.0\Reflector.exe', 'r')
+# f.write('Hello World, Python!')
+# f.write('123')
+# content = f.read()
+# print content
+
+"""
+    open函数是Python的内置函数，一般推荐用open函数打开文件，open函数使用file()类型返回一个file对象。
+    
+    一个文本文件每一行都会有一个换行符'\n'，但最后一行没有，下面这个1.txt中一共有三行：
+    123
+    （空行）
+    （空行）
+    执行下面279~285行代码会得到下面的输出：
+    '123'
+    '\n'
+    ''
+    这种方法用于判断文件的空行与结尾，空行用'\n'表示，结尾用''表示。
+"""
+f = open('1.txt', 'r+')
+# line = f.readline()
+# print repr(line)
+# line = f.readline()
+# print repr(line)
+# line = f.readline()  # 在文件中这已经是结尾了，但是再进行f.readline()调用，还是会得到''的结果。
+# print repr(line)
+#
+
+"""
+    以for...in...的方法枚举f得到的是123等字符串，以list(f)或f.readlines()的方法得到的是list，list中的字符串是'123\n'等
+    字符串。
+    
+    open函数返回的是file对象，file对象应该是一种流，读过的行不能被同一个open函数打开的file对象再次读取。
+"""
+# # 结尾在遍历中不会被枚举。
+# for l in f:
+#     print repr(l)
+
+# listFile = list(f)
+# print listFile
+
+f.write('凌冲')
+# f.flush()  # 在f.write()之后不加f.flush()会出现乱码。
+# lines = f.readlines()
+# print lines
+# print f.tell()  # 前面因为调用了f.write()，这里f.tell()的值为文件大小，因为f对象的指针在写操作之后指向了文件的结尾。
+# print repr(f.readline())  # 因为f对象的指针指向了文件的结尾，所以这里的输出为''。
+
+value = ('The answer is ', 39)
+s = str(value)
+f.write(s)
+f.flush()
