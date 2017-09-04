@@ -249,7 +249,7 @@ from python_tutorial import *
 # print '{0}{two}'.format(1, two=2)
 #
 # table = {'凌冲': 123, '朗朗': 333}
-# for k, v in table.items():
+# for k, v in table.items():v
 #     print '{k:10}==>{v:10d}'.format(k=k, v=v)
 #
 # print '{凌冲},{朗朗}'.format(**table)
