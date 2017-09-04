@@ -18,6 +18,7 @@
 # print matRand * invMatRand - eye(4)
 
 from python_tutorial import *
+import json
 
 # while True:
 #     s = raw_input('请输入一个数字：')
@@ -254,3 +255,97 @@ from python_tutorial import *
 #
 # print '{凌冲},{朗朗}'.format(**table)
 # print '{0[凌冲]},{0[朗朗]}'.format(table)
+
+# print file.__doc__
+
+# f = open('Reflector 7.0\Reflector.exe', 'r')
+# f.write('Hello World, Python!')
+# f.write('123')
+# content = f.read()
+# print content
+
+"""
+    open函数是Python的内置函数，一般推荐用open函数打开文件，open函数使用file()类型返回一个file对象。
+    
+    一个文本文件每一行都会有一个换行符'\n'，但最后一行没有，下面这个1.txt中一共有三行：
+    123
+    （空行）
+    （空行）
+    执行下面279~285行代码会得到下面的输出：
+    '123'
+    '\n'
+    ''
+    这种方法用于判断文件的空行与结尾，空行用'\n'表示，结尾用''表示。
+"""
+# f = open('1.txt', 'w+')
+# line = f.readline()
+# print repr(line)
+# line = f.readline()
+# print repr(line)
+# line = f.readline()  # 在文件中这已经是结尾了，但是再进行f.readline()调用，还是会得到''的结果。
+# print repr(line)
+#
+
+"""
+    以for...in...的方法枚举f得到的是123等字符串，以list(f)或f.readlines()的方法得到的是list，list中的字符串是'123\n'等
+    字符串。
+    
+    open函数返回的是file对象，file对象应该是一种流，读过的行不能被同一个open函数打开的file对象再次读取。
+"""
+# # 结尾在遍历中不会被枚举。
+# for l in f:
+#     print repr(l)
+
+# listFile = list(f)
+# print listFile
+
+# f.write('凌冲')
+# f.flush()  # 在f.write()之后不加f.flush()会出现乱码。
+# lines = f.readlines()
+# print lines
+# print f.tell()  # 前面因为调用了f.write()，这里f.tell()的值为文件大小，因为f对象的指针在写操作之后指向了文件的结尾。
+# print repr(f.readline())  # 因为f对象的指针指向了文件的结尾，所以这里的输出为''。
+
+# value = ('The answer is ', 39)
+# s = str(value)
+# f.write(s)
+# f.flush()
+
+# f.seek(3, 0)
+# print f.readline()
+
+# with open('1.txt', 'a+') as f:
+#     f.write('123')
+#     f.flush()
+#     f.seek(0, 0)
+#     print f.readline()
+# print f.closed
+
+# f = open('1.txt', 'w+')
+# obj1 = {'name': '凌冲', 'age': 33}
+# json.dump(obj1, f)
+# obj2 = json.load(f)
+# print str(obj1)
+# print obj2
+# json.dump(obj1, f)
+# obj2 = json.load(f)
+# print obj2
+
+# dic1 = {'type': 'dic1', 'username': '凌冲', 'age': 16}
+# json_dic1 = json.dumps(dic1)
+# print json_dic1
+# json_dic2 = json.dumps(dic1, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
+# print json_dic2
+#
+# f = open('1', 'w+')
+# json.dump(json_dic1, f, encoding='utf-8', ensure_ascii=False)
+# jsonDic3 = json.load(f, encoding='utf-8')
+# print jsonDic3
+
+
+j = {'username': '凌冲'}
+with open("test.json", "w") as outfile:
+    json.dump(j, outfile, indent=4, ensure_ascii=False)
+
+with open("test.json") as infile:
+    j = json.load(infile)
