@@ -18,6 +18,7 @@
 # print matRand * invMatRand - eye(4)
 
 from python_tutorial import *
+import json
 
 # while True:
 #     s = raw_input('请输入一个数字：')
@@ -276,7 +277,7 @@ from python_tutorial import *
     ''
     这种方法用于判断文件的空行与结尾，空行用'\n'表示，结尾用''表示。
 """
-f = open('1.txt', 'r+')
+# f = open('1.txt', 'w+')
 # line = f.readline()
 # print repr(line)
 # line = f.readline()
@@ -298,14 +299,53 @@ f = open('1.txt', 'r+')
 # listFile = list(f)
 # print listFile
 
-f.write('凌冲')
+# f.write('凌冲')
 # f.flush()  # 在f.write()之后不加f.flush()会出现乱码。
 # lines = f.readlines()
 # print lines
 # print f.tell()  # 前面因为调用了f.write()，这里f.tell()的值为文件大小，因为f对象的指针在写操作之后指向了文件的结尾。
 # print repr(f.readline())  # 因为f对象的指针指向了文件的结尾，所以这里的输出为''。
 
-value = ('The answer is ', 39)
-s = str(value)
-f.write(s)
-f.flush()
+# value = ('The answer is ', 39)
+# s = str(value)
+# f.write(s)
+# f.flush()
+
+# f.seek(3, 0)
+# print f.readline()
+
+# with open('1.txt', 'a+') as f:
+#     f.write('123')
+#     f.flush()
+#     f.seek(0, 0)
+#     print f.readline()
+# print f.closed
+
+# f = open('1.txt', 'w+')
+# obj1 = {'name': '凌冲', 'age': 33}
+# json.dump(obj1, f)
+# obj2 = json.load(f)
+# print str(obj1)
+# print obj2
+# json.dump(obj1, f)
+# obj2 = json.load(f)
+# print obj2
+
+# dic1 = {'type': 'dic1', 'username': '凌冲', 'age': 16}
+# json_dic1 = json.dumps(dic1)
+# print json_dic1
+# json_dic2 = json.dumps(dic1, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
+# print json_dic2
+#
+# f = open('1', 'w+')
+# json.dump(json_dic1, f, encoding='utf-8', ensure_ascii=False)
+# jsonDic3 = json.load(f, encoding='utf-8')
+# print jsonDic3
+
+
+j = {'username': '凌冲'}
+with open("test.json", "w") as outfile:
+    json.dump(j, outfile, indent=4, ensure_ascii=False)
+
+with open("test.json") as infile:
+    j = json.load(infile)
