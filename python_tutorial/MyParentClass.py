@@ -6,6 +6,7 @@ class MyParentClass:
     s = 'MyParentClass'
 
     def __init__(self):
+        print self.s
         pass
 
     def print_hello(self):

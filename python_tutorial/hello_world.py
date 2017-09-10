@@ -412,5 +412,11 @@ import json
 # print cls2.__class__
 
 
-cls = MySubClass.MySubClass()
-cls.print_hello()
+# cls = MySubClass.MySubClass()
+# cls.f()
+# cls.g()
+
+
+s = '123,333'
+setString = set(s1 for s1 in s.split(','))
+print setString
