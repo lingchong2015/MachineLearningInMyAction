@@ -394,6 +394,17 @@ import json
 # print x
 
 
-cls = MyClass.MyClass()
+cls1 = MyClass.MyClass(123)
 print MyClass.__doc__
 print MyClass.__name__
+print MyClass.MyClass.f  # 未绑定类方法
+print cls1.f  # 绑定实例方法
+
+cls1.f()
+
+cls2 = MyClass.MyClass(333)
+# cls2.i = 333
+
+cls1.f()
+cls2.f()
+

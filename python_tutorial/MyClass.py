@@ -5,10 +5,12 @@
 
 class MyClass:
 
-    i = 123
+    i = 0
+    s = []
 
-    def __init__(self):
-        pass
+    def __init__(self, _i):
+        self.i = _i
+        self.s.append(_i)
 
     def f(self):
-        print 'Hello World ' + str(self.i) + "!"
+        print 'Hello World ' + str(self.i) + str(self.s) + "!"
