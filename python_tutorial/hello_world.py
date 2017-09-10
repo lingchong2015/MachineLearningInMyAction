@@ -413,3 +413,4 @@ import json
 
 
 cls = MySubClass.MySubClass()
+cls.print_hello()

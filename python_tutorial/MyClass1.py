@@ -1,9 +1,11 @@
 # coding:utf-8
 
+from python_tutorial.MyParentClass import MyParentClass
+
 """一个简单的Python类"""
 
 
-class MyClass:
+class MyClass(MyParentClass):
 
     _i = 0
     _s = []
