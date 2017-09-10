@@ -1,1 +1,1 @@
-__all__ = ['fib', 'MyClass']
+__all__ = ['fib', 'MyClass', 'MySubClass']

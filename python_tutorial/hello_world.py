@@ -17,7 +17,7 @@
 #
 # print matRand * invMatRand - eye(4)
 
-from python_tutorial import MyClass
+from python_tutorial import *
 import json
 
 # while True:
@@ -394,17 +394,22 @@ import json
 # print x
 
 
-cls1 = MyClass.MyClass(123)
-print MyClass.__doc__
-print MyClass.__name__
-print MyClass.MyClass.f  # 未绑定类方法
-print cls1.f  # 绑定实例方法
+# cls1 = MyClass.MyClass(123)
+# print MyClass.__doc__
+# print MyClass.__name__
+# print MyClass.MyClass.f  # 未绑定类方法
+# print cls1.f  # 绑定实例方法
+#
+# cls1.f()
+#
+# cls2 = MyClass.MyClass(333)
+# # cls2.i = 333
+#
+# cls1.f()
+# cls2.f()
+#
+# print cls1.__class__
+# print cls2.__class__
 
-cls1.f()
 
-cls2 = MyClass.MyClass(333)
-# cls2.i = 333
-
-cls1.f()
-cls2.f()
-
+cls = MySubClass.MySubClass()
