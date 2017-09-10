@@ -7,12 +7,12 @@ from python_tutorial.MyParentClass import MyParentClass
 
 class MyClass(MyParentClass):
 
-    _i = 0
-    _s = []
+    i = 0
+    l = []
 
     def __init__(self, _i):
-        self._i = _i
-        self._s.append(_i)
+        self.i = _i
+        self.l.append(_i)
 
     def f(self):
-        print 'Hello World ' + str(self._i) + str(self._s) + "!"
+        print 'Hello World ' + str(self.i) + str(self.l) + "!"
