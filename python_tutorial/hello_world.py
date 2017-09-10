@@ -17,7 +17,7 @@
 #
 # print matRand * invMatRand - eye(4)
 
-from python_tutorial import *
+from python_tutorial import MyClass
 import json
 
 # while True:
@@ -343,9 +343,57 @@ import json
 # print jsonDic3
 
 
-j = {'username': '凌冲'}
-with open("test.json", "w") as outfile:
-    json.dump(j, outfile, indent=4, ensure_ascii=False)
+# j = {'username': '凌冲'}
+# with open("test.json", "w") as outfile:
+#     json.dump(j, outfile, indent=4, ensure_ascii=False)
+#
+# with open("test.json") as infile:
+#     j = json.load(infile)
+#
+# print j
 
-with open("test.json") as infile:
-    j = json.load(infile)
+# x = 0
+# while True:
+#     try:
+#         x = int(raw_input('请输入一个数字：'))
+#         break
+#     except ValueError:
+#         print '输入的不是有效数字，请重新输入。'
+#
+# print x
+
+# print fib.__name__
+
+# print fib.a
+# print fib.b
+# del fib.a
+# try:
+#     print fib.a
+# except AttributeError as e:
+#     print e.__str__()
+
+# print fib.__doc__
+
+# fib.fib_print(3)
+
+# print abs.__module__
+
+# global x
+# x = 3
+#
+#
+# def print_x(i):
+#     # x = i + 1
+#     # del x
+#     print x
+#     if x == 3:
+#         del x
+#         print_x(5)
+#
+# print_x(2)
+# print x
+
+
+cls = MyClass.MyClass()
+print MyClass.__doc__
+print MyClass.__name__
