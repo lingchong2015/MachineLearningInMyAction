@@ -292,6 +292,8 @@ import json
     
     open函数返回的是file对象，file对象应该是一种流，读过的行不能被同一个open函数打开的file对象再次读取。
 """
+
+
 # # 结尾在遍历中不会被枚举。
 # for l in f:
 #     print repr(l)
@@ -321,31 +323,31 @@ import json
 #     print f.readline()
 # print f.closed
 
-# f = open('1.txt', 'w+')
-# obj1 = {'name': '凌冲', 'age': 33}
-# json.dump(obj1, f)
-# obj2 = json.load(f)
-# print str(obj1)
-# print obj2
-# json.dump(obj1, f)
-# obj2 = json.load(f)
-# print obj2
 
-# dic1 = {'type': 'dic1', 'username': '凌冲', 'age': 16}
-# json_dic1 = json.dumps(dic1)
-# print json_dic1
-# json_dic2 = json.dumps(dic1, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
-# print json_dic2
-#
-# f = open('1', 'w+')
-# json.dump(json_dic1, f, encoding='utf-8', ensure_ascii=False)
-# jsonDic3 = json.load(f, encoding='utf-8')
-# print jsonDic3
+def _byteify(data, ignore_dicts=False):
+    # if this is a unicode string, return its string representation
+    if isinstance(data, unicode):
+        return data.encode('utf-8')
+    # if this is a list of values, return list of byteified values
+    if isinstance(data, list):
+        return [_byteify(item, ignore_dicts=True) for item in data]
+    # if this is a dictionary, return dictionary of byteified keys and values
+    # but only if we haven't already byteified it
+    if isinstance(data, dict) and not ignore_dicts:
+        return {
+            _byteify(key, ignore_dicts=True): _byteify(value, ignore_dicts=True)
+            for key, value in data.iteritems()
+        }
+    # if it's anything else, return it in its original form
+    return data
 
 
-j = {'username': '凌冲'}
-with open("test.json", "w") as outfile:
-    json.dump(j, outfile, indent=4, ensure_ascii=False)
+objOut = {'username': '凌冲', 'age': 33}
+with open('1.json', 'w') as outFile:
+    json.dump(objOut, outFile, indent=4, ensure_ascii=False)
 
-with open("test.json") as infile:
-    j = json.load(infile)
+objIn = None
+with open('1.json', 'r') as inFile:
+    objIn = _byteify(json.load(inFile, object_hook=_byteify), ignore_dicts=False)
+
+print objIn
