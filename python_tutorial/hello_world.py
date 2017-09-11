@@ -250,7 +250,7 @@ import json
 # print '{0}{two}'.format(1, two=2)
 #
 # table = {'凌冲': 123, '朗朗': 333}
-# for k, v in table.items():
+# for k, v in table.items():v
 #     print '{k:10}==>{v:10d}'.format(k=k, v=v)
 #
 # print '{凌冲},{朗朗}'.format(**table)
@@ -292,8 +292,6 @@ import json
     
     open函数返回的是file对象，file对象应该是一种流，读过的行不能被同一个open函数打开的file对象再次读取。
 """
-
-
 # # 结尾在遍历中不会被枚举。
 # for l in f:
 #     print repr(l)
@@ -323,31 +321,102 @@ import json
 #     print f.readline()
 # print f.closed
 
+# f = open('1.txt', 'w+')
+# obj1 = {'name': '凌冲', 'age': 33}
+# json.dump(obj1, f)
+# obj2 = json.load(f)
+# print str(obj1)
+# print obj2
+# json.dump(obj1, f)
+# obj2 = json.load(f)
+# print obj2
 
-def _byteify(data, ignore_dicts=False):
-    # if this is a unicode string, return its string representation
-    if isinstance(data, unicode):
-        return data.encode('utf-8')
-    # if this is a list of values, return list of byteified values
-    if isinstance(data, list):
-        return [_byteify(item, ignore_dicts=True) for item in data]
-    # if this is a dictionary, return dictionary of byteified keys and values
-    # but only if we haven't already byteified it
-    if isinstance(data, dict) and not ignore_dicts:
-        return {
-            _byteify(key, ignore_dicts=True): _byteify(value, ignore_dicts=True)
-            for key, value in data.iteritems()
-        }
-    # if it's anything else, return it in its original form
-    return data
+# dic1 = {'type': 'dic1', 'username': '凌冲', 'age': 16}
+# json_dic1 = json.dumps(dic1)
+# print json_dic1
+# json_dic2 = json.dumps(dic1, sort_keys=True, indent=4, separators=(',', ': '), ensure_ascii=False)
+# print json_dic2
+#
+# f = open('1', 'w+')
+# json.dump(json_dic1, f, encoding='utf-8', ensure_ascii=False)
+# jsonDic3 = json.load(f, encoding='utf-8')
+# print jsonDic3
 
 
-objOut = {'username': '凌冲', 'age': 33}
-with open('1.json', 'w') as outFile:
-    json.dump(objOut, outFile, indent=4, ensure_ascii=False)
+# j = {'username': '凌冲'}
+# with open("test.json", "w") as outfile:
+#     json.dump(j, outfile, indent=4, ensure_ascii=False)
+#
+# with open("test.json") as infile:
+#     j = json.load(infile)
+#
+# print j
 
-objIn = None
-with open('1.json', 'r') as inFile:
-    objIn = _byteify(json.load(inFile, object_hook=_byteify), ignore_dicts=False)
+# x = 0
+# while True:
+#     try:
+#         x = int(raw_input('请输入一个数字：'))
+#         break
+#     except ValueError:
+#         print '输入的不是有效数字，请重新输入。'
+#
+# print x
 
-print objIn
+# print fib.__name__
+
+# print fib.a
+# print fib.b
+# del fib.a
+# try:
+#     print fib.a
+# except AttributeError as e:
+#     print e.__str__()
+
+# print fib.__doc__
+
+# fib.fib_print(3)
+
+# print abs.__module__
+
+# global x
+# x = 3
+#
+#
+# def print_x(i):
+#     # x = i + 1
+#     # del x
+#     print x
+#     if x == 3:
+#         del x
+#         print_x(5)
+#
+# print_x(2)
+# print x
+
+
+# cls1 = MyClass.MyClass(123)
+# print MyClass.__doc__
+# print MyClass.__name__
+# print MyClass.MyClass.f  # 未绑定类方法
+# print cls1.f  # 绑定实例方法
+#
+# cls1.f()
+#
+# cls2 = MyClass.MyClass(333)
+# # cls2.i = 333
+#
+# cls1.f()
+# cls2.f()
+#
+# print cls1.__class__
+# print cls2.__class__
+
+
+# cls = MySubClass.MySubClass()
+# cls.f()
+# cls.g()
+
+
+s = '123,333'
+setString = set(s1 for s1 in s.split(','))
+print setString
