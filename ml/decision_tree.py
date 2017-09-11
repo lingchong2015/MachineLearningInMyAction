@@ -16,10 +16,17 @@ Function
 """
 
 
-def calc_shannon_entropy(_data_set):  # 计算熵，信息增益是熵的减少（数据无序度）。
+def calc_shannon_entropy(_data_set):
+    """计算熵，信息增益是熵的减少（数据无序度）。
+
+    :param _data_set: 待计算熵的数据集。
+    :return: 输入数据集_data_set以最后一列为分类类别的熵。
+    """
+
     row_num = len(_data_set)
     map_label = {}
 
+    # 以最后一列标签分类，将每一类标签（这里即Yes与No）出现的次数存储到字典map_label中。
     for r in _data_set:
         label = r[-1]
         if label not in map_label.keys():
@@ -27,6 +34,7 @@ def calc_shannon_entropy(_data_set):  # 计算熵，信息增益是熵的减少�
         else:
             map_label[label] += 1
 
+    # 根据计算熵的公式得到信息的数据无序度。
     result = 0.0
     for k in map_label.keys():
         prop = (float(map_label[k]) / row_num)
@@ -120,7 +128,12 @@ def create_tree(_data_set, _list_col_name):  # 构建决策树。
     return decision_tree
 
 
-def create_data_set():  # 创建测试样本。
+def create_data_set():
+    """创建测试样本。
+
+    :return:两个列表：测试样本列表与测试样本每一列的列明列表。
+    """
+
     return [[1, 1, 'Yes'],
             [1, 1, 'Yes'],
             [1, 0, 'No'],
@@ -128,29 +141,12 @@ def create_data_set():  # 创建测试样本。
             [0, 1, 'No']], ['No Surfacing', 'Flippers']
 
 
-def get_label_list(_data_set):  # 获取数据集中的标签。
+def get_label_list(_data_set):
+    """获取数据集中的标签。
+
+    :param _data_set:数据集。
+    :return:数据集每一行最后一列组成的列表。
+    """
     return [row[-1] for row in _data_set]
 
-
-"""
-Caller
-"""
-
-
-data_set, label_list = create_data_set()
-# shannon_entropy = calc_shannon_entropy(data_set)
-# print shannon_entropy
-# list_split = split_data_set(data_set, 0, 1)
-# print list_split
-# list_split = split_data_set(data_set, 0, 0)
-# print list_split
-# ret_best_feature = choose_best_feature_to_split(data_set)
-# print ret_best_feature
-
-# test_label_list = get_label_list(data_set)
-# result_majority_label = majority_cnt(test_label_list)
-# print result_majority_label
-
-ret_decision_tree = create_tree(data_set, label_list)
-print ret_decision_tree
 

@@ -1,1 +1,1 @@
-__all__ = ['decision_tree', 'knn', 'tree_plotter']
+__all__ = ['decision_tree', 'knn', 'tree_plotter', 'main']
