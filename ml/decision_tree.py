@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding:utf-8
 
 """
 内容：决策树算法
@@ -9,11 +9,6 @@
 from math import log
 
 import operator
-
-
-"""
-Function
-"""
 
 
 def calc_shannon_entropy(_data_set):
@@ -43,28 +38,44 @@ def calc_shannon_entropy(_data_set):
     return result
 
 
-# 1、提取一个数据元组A。
-# 2、如果A中_axis列的值等于_value，则将A中其余列加入返回值列表中。
-# 3、重复1，直到_data_set遍历结束。
-def split_data_set(_data_set, _axis, _value):  # 根据特征索引（_axis）与特征值（_value）划分数据集（_data_set）。
+def split_data_set(_data_set, _attr_index, _attr_value):
+    """# 根据特征索引（_attr_index）与特征值（_attr_value）划分数据集（_data_set）。
+
+    1、提取一个数据元组A。
+    2、如果A中_attr_index列的值等于_attr_value，则将A中其余列加入返回值列表中。
+    3、重复1，直到_data_set遍历结束。
+
+    :param _data_set: 数据集。
+    :param _attr_index: 特征索引。
+    :param _attr_value: 特征值
+    :return: 提取的数据集。
+    """
+
     list_result = []
-    for item in _data_set:
-        col_sel_val = item[_axis]
-        if col_sel_val == _value:
-            list_tmp = item[:_axis]
-            list_tmp.extend(item[_axis + 1:])
-            list_result.append(list_tmp)
+    for row in _data_set:
+        col_sel_val = row[_attr_index]
+        if col_sel_val == _attr_value:
+            list_extracted = row[:_attr_index]
+            list_extracted.extend(row[_attr_index + 1:])
+            list_result.append(list_extracted)
 
     return list_result
 
 
-# 1、计算熵作为基本信息增益。
-# 2、遍历每一个特征，计算以每个特征为数据集划分标准的子数据集的熵，熵越小表明信息增益越大。
-# 3、选取熵最小的特征作为最优划分方案。
-def choose_best_feature_to_split(_data_set):  # 选择最优数据集划分方式。
-    base_shannon_entropy = calc_shannon_entropy(_data_set)
-    best_feature_index = -1
-    best_info_gain = 0.0
+def choose_best_feature_to_split(_data_set):
+    """选择最优数据集划分方式。
+
+    1、计算熵作为基本信息增益。
+    2、遍历每一个特征，计算以每个特征为数据集划分标准的子数据集的熵，熵越小表明信息增益越大。
+    3、选取熵最小的特征作为最优划分方案。
+
+    :param _data_set: 数据集。
+    :return: 用于划分最优数据集的特征索引。
+    """
+
+    base_shannon_entropy = calc_shannon_entropy(_data_set)  # 获取该数据集的熵。
+    best_feature_index = -1  # 初始化最优特征索引。
+    best_info_gain = 0.0  # 初始化信息增益。
 
     feature_num = len(_data_set[0]) - 1
     for i in range(feature_num):
@@ -78,14 +89,20 @@ def choose_best_feature_to_split(_data_set):  # 选择最优数据集划分方�
                 sub_data_set)
 
         info_gain = base_shannon_entropy - sub_data_set_shannon_entropy  # 信息增益是熵（数据无序度）的减少。
-        if info_gain > best_info_gain:
+        if info_gain >= best_info_gain:
             best_info_gain = info_gain
             best_feature_index = i
 
     return best_feature_index
 
 
-def majority_cnt(_list_label):  # 从标签列表中选取出现频率最高的标签。
+def majority_cnt(_list_label):
+    """从标签列表中选取出现频率最高的标签。
+
+    :param _list_label: 标签列表。
+    :return: 标签列表中出现频率最高的标签。
+    """
+
     map_label_class = {}
     for label in _list_label:
         if label not in map_label_class.keys():
@@ -109,12 +126,12 @@ def create_tree(_data_set, _list_col_name):  # 构建决策树。
     if list_class.count(list_class[0]) == len(list_class):
         return list_class[0]
 
-    if len(_data_set) == 1:
+    if len(_data_set[0]) == 1:
         return majority_cnt(list_class)
 
     best_feature = choose_best_feature_to_split(_data_set)
     tree_node_name = _list_col_name[best_feature]
-    del(_list_col_name[best_feature])
+    del (_list_col_name[best_feature])
 
     decision_tree = {tree_node_name: {}}  # 二维字典。
 
@@ -131,7 +148,7 @@ def create_tree(_data_set, _list_col_name):  # 构建决策树。
 def create_data_set():
     """创建测试样本。
 
-    :return:两个列表：测试样本列表与测试样本每一列的列明列表。
+    :return: 两个列表，测试样本列表与测试样本每一列的列明列表。
     """
 
     return [[1, 1, 'Yes'],
@@ -144,9 +161,7 @@ def create_data_set():
 def get_label_list(_data_set):
     """获取数据集中的标签。
 
-    :param _data_set:数据集。
-    :return:数据集每一行最后一列组成的列表。
+    :param _data_set: 数据集。
+    :return: 数据集每一行最后一列组成的列表。
     """
     return [row[-1] for row in _data_set]
-
-

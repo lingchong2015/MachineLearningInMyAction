@@ -3,8 +3,7 @@
 from decision_tree import *
 
 data_set, label_list = create_data_set()
-shannon_entropy = calc_shannon_entropy(data_set)
-print shannon_entropy
+# shannon_entropy = calc_shannon_entropy(data_set)
 # print shannon_entropy
 # list_split = split_data_set(data_set, 0, 1)
 # print list_split
@@ -17,5 +16,5 @@ print shannon_entropy
 # result_majority_label = majority_cnt(test_label_list)
 # print result_majority_label
 
-# ret_decision_tree = create_tree(data_set, label_list)
-# print ret_decision_tree
+ret_decision_tree = create_tree(data_set, label_list)
+print ret_decision_tree
